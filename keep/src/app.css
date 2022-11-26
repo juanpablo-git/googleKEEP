@@ -1,0 +1,19 @@
+.App{
+    width: 90%;
+    height: 100vh;
+    background-color: #ffffff;
+    margin-top: 5rem;
+}
+.container-input{
+    display: flex;
+    justify-content: center;
+    /* padding-top: 5rem; */
+   
+
+
+}
+.container-modal{
+    margin-top: 5rem;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
