@@ -32,11 +32,12 @@ export default ({displayTitulo,setDisplayTitulo}) => {
                 </div>
                 <div >
                     <textarea ref={textArea} autoFocus className="textArea"
-                    rows='1'
+                    rows='1'  cols="70"
                     onKeyDown={(e)=>{
                         console.log(e.key)
                         if(e.key == "Enter") textArea.current.rows +=1
                         if(e.key == "Delete" && textArea.current.rows > 1 ) textArea.current.rows -=1
+                        if (textArea.current.value.length%69 == 0) textArea.current.rows +=1
                     }}
                     onClick={() =>{
                         setDisplayTitulo(1)
