@@ -31,13 +31,11 @@ export default ({displayTitulo,setDisplayTitulo}) => {
                     <input placeholder="Titulo" style={{ display: displayTitulo ==1 ? "flex" : "none" }} />
                 </div>
                 <div >
-                    <textarea ref={textArea} autoFocus className="textArea"
-                    rows='1'  cols="70"
+                    <textarea ref={textArea} autoFocus className="textArea" cols="70"
                     onKeyDown={(e)=>{
-                        console.log(e.key)
-                        if(e.key == "Enter") textArea.current.rows +=1
-                        if(e.key == "Delete" && textArea.current.rows > 1 ) textArea.current.rows -=1
-                        if (textArea.current.value.length%69 == 0) textArea.current.rows +=1
+                        e.target.style.height = "15px"
+                    //    console.log(e.target)
+                        e.target.style.height = `${e.target.scrollHeight}px`
                     }}
                     onClick={() =>{
                         setDisplayTitulo(1)

@@ -10,6 +10,7 @@ function App() {
    
     <div className="App">
       <div   className='container-input'>
+        
       <Imput setDisplayTitulo={setDisplayTitulo} displayTitulo={displayTitulo} />
       </div>
       <div className='container-modal'>
