@@ -1,8 +1,10 @@
 import { useRef, useReducer } from "react"
+import { insertNota } from "../config/database";
 import { focusTextArea } from "./events";
 import "./style.css";
 export default ({ displayTitulo, setDisplayTitulo }) => {
     const textArea = useRef()
+    const titulo = useRef()
     const reducer = (state, action) => {
         switch (action.type) {
             case "noEnvolto":
@@ -19,6 +21,10 @@ export default ({ displayTitulo, setDisplayTitulo }) => {
             <div style={{ position: "fixed", width: "100vw", height: "100vh", top: 0, display: state.displayEnvolto ? "flex" : "none" }} onClick={() => {
                 setDisplayTitulo(0)
                 dicpach({ type: "noEnvolto" })
+                console.log(textArea.current.value,titulo.current.value)
+                if(textArea.current.value !== "")insertNota({
+                    nota:textArea.current.value !== ""?textArea.current.value: "",
+                    titulo:titulo.current.value !== ""? titulo.current.value : ""})
             }} className="envolto">
             </div>
 
@@ -26,7 +32,7 @@ export default ({ displayTitulo, setDisplayTitulo }) => {
 
                 <div>
 
-                    <input placeholder="Titulo" style={{ display: displayTitulo == 1 ? "flex" : "none" }} />
+                    <input ref={titulo} placeholder="Titulo" style={{ display: displayTitulo == 1 ? "flex" : "none" }} />
                 </div>
                 <div >
                     <textarea ref={textArea} autoFocus className="textArea" cols="70"
