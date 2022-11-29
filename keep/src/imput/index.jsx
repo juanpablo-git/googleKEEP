@@ -29,25 +29,17 @@ export default ({ displayTitulo, setDisplayTitulo }) => {
                     <input placeholder="Titulo" style={{ display: displayTitulo == 1 ? "flex" : "none" }} />
                 </div>
                 <div >
-                    <textarea ref={textArea} autoFocus className="textArea"
-                        rows='1' cols="70"
-                        onKeyDown={(e) => {
-                            if (textArea.current.scrollHeight > textArea.current.offsetHeight){
-                                console.log(textArea.current.scrollHeight > textArea.current.offsetHeight)
-                                textArea.current.rows += 1
-                            } 
+                    <textarea ref={textArea} autoFocus className="textArea" cols="70"
+                    onKeyDown={(e)=>{
+                        e.target.style.height = "15px"
+                    //    console.log(e.target)
+                        e.target.style.height = `${e.target.scrollHeight}px`
+                    }}
+                    onClick={() =>{
+                        setDisplayTitulo(1)
+                        dicpach({type:"noEnvolto"})
 
-                            if ( textArea.current.scrollHeight < textArea.current.offsetHeight){
-                                console.log(textArea.current.scrollHeight < textArea.current.offsetHeight)
-                                textArea.current.rows -= 1
-                            } 
-
-                        }}
-                        onClick={() => {
-                            setDisplayTitulo(1)
-                            dicpach({ type: "noEnvolto" })
-
-                        }} name="" id="" placeholder=" Crie uma nota...">
+                    }}   name="" id="" placeholder=" Crie uma nota...">
 
                     </textarea>
                 </div>
