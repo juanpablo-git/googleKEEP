@@ -13,6 +13,7 @@ export async function insertNota({titulo,nota}){
 
 export async function getNota(){
     const file = await fs.readFile('./db.json');
+    console.log(file)
     return JSON.parse(file)
 }
 
