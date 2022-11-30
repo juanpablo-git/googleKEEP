@@ -28,7 +28,7 @@ export default ({displayTitulo,setDisplayTitulo}) => {
 
                 <div>
 
-                    <input placeholder="Titulo" style={{ display: displayTitulo ==1 ? "flex" : "none" }} />
+                    <input className="titulo" placeholder="Titulo" style={{ display: displayTitulo ==1 ? "flex" : "none" }} />
                 </div>
                 <div >
                     <textarea ref={textArea} autoFocus className="textArea" cols="70"

@@ -1,5 +1,4 @@
 import { useRef,useState} from 'react'
-import reactLogo from './assets/react.svg'
 import Modal from './modal'
 import Imput from './imput'
 import "./app.css"
@@ -9,6 +8,9 @@ function App() {
 <>
    
     <div className="App">
+      <div className='input-searsh'>
+        <input type="text" style={{display:"flex"}}/>
+      </div>
       <div   className='container-input'>
         
       <Imput setDisplayTitulo={setDisplayTitulo} displayTitulo={displayTitulo} />
