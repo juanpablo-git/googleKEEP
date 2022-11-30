@@ -1,0 +1,13 @@
+.show-titulo{
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: none;
+}
+
+.modal-nota{
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+}
