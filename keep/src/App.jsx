@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback, useMemo } from 'react'
+import { useRef, useState, useEffect, useReducer } from 'react'
 import teste from "../db.json"
 import Modal from './modal'
 import Imput from './imput'
@@ -6,12 +6,29 @@ import "./app.css"
 import { getNota } from "./config/database"
 import Nota from './nota'
 
-// var notas = await  getNota()
 function App() {
   const [displayTitulo, setDisplayTitulo] = useState(0)
   const [notas, setNotas] = useState([])
+  const inicialState = { display: false, titulo: "", nota: "" }
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case true:
+
+        return {
+          display: true,
+          titulo: action.titulo,
+          nota: action.nota,
+          id:action.id
+        }
+        break;
+      case false:
+        return { display: false, titulo: "", nota: "" }
+        break;
+
+    }
+  }
+  const [showNotas, dispatchNotas] = useReducer(reducer, inicialState)
   async function atualizaModal() {
-    console.log("Atualizou")
     setNotas(teste)
   }
   const referencia = useRef()
@@ -31,12 +48,12 @@ function App() {
         </div>
         <div className='container-modal'>
           {
-            notas?.map((i) => {
-              return <Modal nota={i.nota} titulo={i.titulo} />
+            notas?.map((i, key) => {
+              return <Modal dispatchNotas={dispatchNotas} id={key} nota={i.nota} titulo={i.titulo} />
             })
           }
         </div>
-      <Nota />
+        <Nota dispatchNotas={dispatchNotas} showModal={showNotas} />
       </div>
 
     </>

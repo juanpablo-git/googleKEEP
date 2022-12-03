@@ -13,14 +13,28 @@ export async function insertNota({titulo,nota}){
 
 export async function getNota(){
     const file = await fs.readFile('./db.json');
-    console.log(file)
     return JSON.parse(file)
 }
 
-// export async function readNota(){
-//     const file = await fs.readFile('./db.json');
-//     console.log(file)
+export async function deletNota(key){
+    let fileJSON = await getNota()
+    fileJSON.splice(key,1)
+    if(fileJSON.length > 0){
+        await fs.writeFile('./db.json',JSON.stringify(fileJSON)).then(r=>console.log(r))
+    }else{
 
-//     await fs.writeFile('./db.json', 'File content');
+        await fs.writeFile('./db.json',JSON.stringify([])).then(r=>console.log(r))
+    }
 
-// }
+
+}
+
+export async function editNota(key,{titulo,nota}){
+    let fileJSON = await getNota()
+    fileJSON[key] = {titulo,nota}
+    console.log({titulo,nota})
+    await fs.writeFile('./db.json',JSON.stringify(fileJSON)).then(r=>console.log(r))
+
+
+
+}

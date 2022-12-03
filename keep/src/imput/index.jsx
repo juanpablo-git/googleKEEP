@@ -22,7 +22,6 @@ export default ({atualizaModal, displayTitulo, setDisplayTitulo }) => {
             <div style={{ position: "fixed", width: "100vw", height: "100vh", top: 0, display: state.displayEnvolto ? "flex" : "none" }} onClick={() => {
                 setDisplayTitulo(0)
                 dicpach({ type: "noEnvolto" })
-                console.log(textArea.current.value,titulo.current.value)
                 if(textArea.current.value !== ""){
                     insertNota({
                     nota:textArea.current.value !== ""?textArea.current.value: "",
