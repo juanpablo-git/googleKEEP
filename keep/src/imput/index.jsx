@@ -27,6 +27,8 @@ export default ({atualizaModal, displayTitulo, setDisplayTitulo }) => {
                     nota:textArea.current.value !== ""?textArea.current.value: "",
                     titulo:titulo.current.value !== ""? titulo.current.value : ""})
                     atualizaModal()
+                    textArea.current.value = ""
+                    titulo.current.value = ""
                 }
                
             }} className="envolto">

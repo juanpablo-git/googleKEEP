@@ -48,9 +48,11 @@ function App() {
         </div>
         <div className='container-modal'>
           {
-            notas?.map((i, key) => {
+            notas.length > 0 ? notas.map((i, key) => {
               return <Modal dispatchNotas={dispatchNotas} id={key} nota={i.nota} titulo={i.titulo} />
             })
+            :
+            <p>Suas notas aparecerão aqui</p>
           }
         </div>
         <Nota dispatchNotas={dispatchNotas} showModal={showNotas} />
