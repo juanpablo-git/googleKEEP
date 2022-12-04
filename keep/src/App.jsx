@@ -29,7 +29,10 @@ function App() {
   }
   const [showNotas, dispatchNotas] = useReducer(reducer, inicialState)
   async function atualizaModal() {
-    setNotas(teste)
+    fetch("./db.json").then(r=>r.json()).then(r=>{
+      // console.log(r)
+      setNotas(r)
+    })
   }
   const referencia = useRef()
 

@@ -4,5 +4,10 @@ import fs from "vite-plugin-fs";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(),fs()]
+  plugins: [react(),fs()],
+  build:{
+    rollupOptions:{
+      external:["fs/promises"]
+    }
+  }
 })

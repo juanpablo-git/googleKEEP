@@ -1,4 +1,4 @@
-import fs from "vite-plugin-fs/browser"
+import fs from "fs"
 
 
 export async function insertNota({titulo,nota}){
@@ -6,7 +6,7 @@ export async function insertNota({titulo,nota}){
     const fileJSON = JSON.parse(file)
     fileJSON.push({titulo:titulo,nota:nota})
     let str =JSON.stringify(fileJSON)
-    await fs.writeFile('./db.json', str).then(r=>console.log(r))
+    await fs.writeFile('./db.json', str).then(r=>console.log("inserindo",r))
 
 
 }
