@@ -10,6 +10,7 @@ import Nota from './nota'
 function App() {
   const [displayTitulo, setDisplayTitulo] = useState(0)
   const [notas, setNotas] = useState([])
+  const [showNota, setShowNotas] = useState({display:0,nota:"",titulo:""})
   async function atualizaModal() {
     console.log("Atualizou")
     setNotas(teste)
@@ -32,11 +33,11 @@ function App() {
         <div className='container-modal'>
           {
             notas?.map((i) => {
-              return <Modal nota={i.nota} titulo={i.titulo} />
+              return <Modal setShowNotas={setShowNotas} nota={i.nota} titulo={i.titulo} />
             })
           }
         </div>
-      <Nota />
+      <Nota showNota={showNota} />
       </div>
 
     </>
