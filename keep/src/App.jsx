@@ -1,43 +1,63 @@
-import { useRef, useState, useEffect, useCallback, useMemo } from 'react'
+import { useRef, useState, useEffect, useReducer } from 'react'
 import teste from "../db.json"
 import Modal from './modal'
 import Imput from './imput'
-import "./app.css"
+import "./style.css"
 import { getNota } from "./config/database"
 import Nota from './nota'
 
-// var notas = await  getNota()
 function App() {
   const [displayTitulo, setDisplayTitulo] = useState(0)
   const [notas, setNotas] = useState([])
-  const [showNota, setShowNotas] = useState({display:0,nota:"",titulo:""})
+  const inicialState = { id: 0, display: false, titulo: "", nota: "" }
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case true:
+
+        return {
+          display: true,
+          titulo: action.titulo,
+          nota: action.nota,
+          id: action.id
+        }
+        break;
+      case false:
+        return { display: false, titulo: "", nota: "" }
+        break;
+
+    }
+  }
+  const [showNotas, dispatchNotas] = useReducer(reducer, inicialState)
   async function atualizaModal() {
-    console.log("Atualizou")
-    setNotas(teste)
+    await fetch("../db.json").then(r => r.json()).then(r => {
+      setNotas(r)
+    }).catch(err => console.log("deu err"))
   }
   const referencia = useRef()
 
   useEffect(() => {
     atualizaModal()
-
-  }, [displayTitulo])
+    
+  }, [])
 
   return (
     <>
 
       <div className="App">
-        <div className='container-input'>
+        <div className='container-input' >
 
-          <Imput atualizaModal={atualizaModal} setDisplayTitulo={setDisplayTitulo} displayTitulo={displayTitulo} />
+          <Imput atualizaModal={{notas:notas,setNotas:setNotas}} setDisplayTitulo={setDisplayTitulo} displayTitulo={displayTitulo} />
         </div>
-        <div className='container-modal'>
+        <div className='teste' style={{ display: "flex", flexWrap: "wrap" }}>
           {
-            notas?.map((i,key) => {
-              return <Modal setShowNotas={setShowNotas} id={key} nota={i.nota} titulo={i.titulo} />
+            notas.length > 0 ? notas.map((i, key) => {
+              return <Modal  atualizaModal={{notas:notas,setNotas:setNotas}} dispatchNotas={dispatchNotas} id={key} nota={i.nota} titulo={i.titulo} />
             })
+              :
+              <p>Suas notas aparecerão aqui</p>
           }
         </div>
-      <Nota setShowNotas={setShowNotas} showNota={showNota} />
+        <Nota atualizaModal={{notas:notas,setNotas:setNotas}} dispatchNotas={dispatchNotas} showModal={showNotas} />
       </div>
 
     </>

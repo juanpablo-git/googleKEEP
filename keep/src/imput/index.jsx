@@ -8,7 +8,6 @@ export default ({atualizaModal, displayTitulo, setDisplayTitulo }) => {
     const reducer = (state, action) => {
         switch (action.type) {
             case "noEnvolto":
-               
                 return {
                     displayEnvolto: !state.displayEnvolto
                 }
@@ -22,15 +21,15 @@ export default ({atualizaModal, displayTitulo, setDisplayTitulo }) => {
             <div style={{ position: "fixed", width: "100vw", height: "100vh", top: 0, display: state.displayEnvolto ? "flex" : "none" }} onClick={() => {
                 setDisplayTitulo(0)
                 dicpach({ type: "noEnvolto" })
-                console.log(textArea.current.value,titulo.current.value)
                 if(textArea.current.value !== ""){
                     insertNota({
                     nota:textArea.current.value !== ""?textArea.current.value: "",
                     titulo:titulo.current.value !== ""? titulo.current.value : ""})
-                    atualizaModal()
-                    textArea.current.value=""
+                    atualizaModal.setNotas([... atualizaModal.notas,{titulo:titulo.current.value,nota:textArea.current.value}])
+                    textArea.current.value = ""
                     titulo.current.value = ""
                 }
+              
                
             }} className="envolto">
             </div>

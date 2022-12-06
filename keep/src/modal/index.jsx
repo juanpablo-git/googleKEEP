@@ -1,25 +1,35 @@
-import React,{useRef} from "react";
-import { deleteNota } from "../config/database";
+import React, { useRef } from "react";
+import { deletNota } from "../config/database";
 import "./style.css"
-
-export default ({ setShowNotas, titulo, nota, id }) => {
-    const closeModal = useRef()
+export default ({ atualizaModal,dispatchNotas, titulo, nota,id }) => {
+    const buttonEdit = useRef()
     return (
         <div
-        onMouseOver={()=>{
-            closeModal.current.style.display = "flex"
+        onMouseOver={(e) => {
+            buttonEdit.current.style.display = "flex"
         }}
-        onMouseOut={()=>{
-            closeModal.current.style.display = "none"
-        }}
-        style={{ margin: "5px", border: "1px solid #e0e0e0", borderRadius: "10px", width: "50%", maxHeight: 300, padding: "10px" }}>
-            <button ref={closeModal} style={{marginLeft:"100%",display:"none",marginBottom:"-24px"}} onClick={()=>{deleteNota(id)}}>x</button>
-            <div onClick={() => {
-                setShowNotas({id:id, display: "flex", titulo, nota })
+            onMouseOut={() => {
+                buttonEdit.current.style.display = "none"
             }} 
-           
-            style={{overflow:"hidden"}}>
-                <h1>
+        style={{ width: "auto",margin:"10px",maxWidth:200, maxHeight: 200, padding: "10px",border: "1px solid #e0e0e0", borderRadius: "10px"}}>
+             <button ref={buttonEdit}
+                    onClick={()=>{
+                        deletNota(atualizaModal,id)
+                       
+                    }}
+                    style={{
+                        borderRadius: "100%",
+                        display: "none",
+                        marginLeft: "100%",
+                    }}>
+                    ✖️
+                </button>
+            <div 
+                onClick={() => {
+                    dispatchNotas({ type: true, id:id,titulo: titulo, nota: nota })
+                }} style={{}}>
+               
+                <h1 style={{whiteSpace:"nowrap",overflow:"hidden",textOverflow:"unset"}}>
                     {titulo}
                 </h1>
                 <br />

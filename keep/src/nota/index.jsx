@@ -1,28 +1,60 @@
 import { useEffect, useRef } from "react"
 import { editNota } from "../config/database"
 
-export default ({ showNota,setShowNotas }) => {
-    const titulo = useRef()
-    const nota = useRef()
+export default ({ atualizaModal,showModal, dispatchNotas }) => {
+    const tituloRef = useRef()
+    const notaRef = useRef()
     useEffect(() => {
-        titulo.current.value = showNota.titulo
-        nota.current.value = showNota.nota
-    }, [showNota])
+        tituloRef.current.value = showModal.titulo
+        notaRef.current.value = showModal.nota
+    }, [showModal])
+
     return (
-        <div style={{ display: showNota.display ? "flex" : "none",justifyContent:"center",alignItems:"center",height:"100vh",width:"100vw",position:"absolute",top:0}}>
-            <div onClick={()=>console.log("clicou")} style={{zIndex:"151", padding: "20px", display: "flex", height: "max-content", flexDirection: "column", width: "50%", alignItems: "center", backgroundColor: "InfoText" }}>
-                <textarea ref={titulo} style={{ width: "90%" }} rows="1"></textarea>
-                <textarea ref={nota} style={{ width: "90%" }} ></textarea>
-            </div>
-            <div
-                onClick={() => { 
-
-                    editNota({id:showNota.id,nota:nota.current.value ,titulo: titulo.current.value })
-                    setShowNotas({display:0,titulo:"",nota:""})
+        <div style={{
+            width: "100%",
+            height: "100%",
+            zIndex: "330",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            display: showModal.display ? "flex" : "none",
+            justifyContent: "center",
+            alignItems: "center"
+        }}>
+            <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                height: '100vh',
+                width: "100vw",
+                zIndex: "146",
+                backgroundColor: "InfoText",
+                opacity:"0.98"
             }}
-                style={{ backgroundColor:"aliceblue",display: "flex", justifyContent: "center", alignItems: "center", position: "fixed", top: 0, left: 0, width: "100vw", height: "100%", zIndex: "150" }}>
+                onClick={() =>{
+                    dispatchNotas({ type: false })
+                    editNota(atualizaModal,showModal.id,{titulo: tituloRef.current.value,nota:notaRef.current.value})
+                }}
+            >
+
             </div>
 
+            <div style={{
+                padding: "20px",
+                display: "flex",
+                height: "max-content",
+                flexDirection: "column",
+                width: "50%",
+                alignItems: "center",
+
+                zIndex: 300,
+                position: "absolute"
+            }}>
+
+                <textarea ref={tituloRef} style={{ width: "90%" }} rows="1"></textarea>
+                <textarea ref={notaRef} onClick={() => { console.log("mantem") }} style={{ width: "90%" }} ></textarea>
+
+            </div>
         </div>
     )
 
