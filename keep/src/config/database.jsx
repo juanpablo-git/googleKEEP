@@ -1,4 +1,4 @@
-import fs from "vite-plugin-fs/browser"
+import fs from "fs/promises"
 
 
 export async function insertNota({titulo,nota}){
@@ -11,16 +11,26 @@ export async function insertNota({titulo,nota}){
 
 }
 
+export async function deleteNota(key){
+    const file = await fs.readFile('./db.json');
+    const fileJSON = JSON.parse(file)
+    fileJSON.splice(key,1)
+    console.log(fileJSON)
+    await fs.writeFile('./db.json', JSON.stringify(fileJSON)).then(r=>console.log(r))
+}
+
 export async function getNota(){
     const file = await fs.readFile('./db.json');
     console.log(file)
     return JSON.parse(file)
 }
 
-// export async function readNota(){
-//     const file = await fs.readFile('./db.json');
-//     console.log(file)
+export async function editNota({id,titulo,nota}){
+    const file = await fs.readFile('./db.json');
+    const fileJSON = JSON.parse(file)
+    fileJSON[id] = {titulo,nota}
+    await fs.writeFile('./db.json', JSON.stringify(fileJSON)).then(r=>console.log(r))
+    console.log("Editou")
 
-//     await fs.writeFile('./db.json', 'File content');
 
-// }
+}

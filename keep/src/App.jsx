@@ -32,12 +32,12 @@ function App() {
         </div>
         <div className='container-modal'>
           {
-            notas?.map((i) => {
-              return <Modal setShowNotas={setShowNotas} nota={i.nota} titulo={i.titulo} />
+            notas?.map((i,key) => {
+              return <Modal setShowNotas={setShowNotas} id={key} nota={i.nota} titulo={i.titulo} />
             })
           }
         </div>
-      <Nota showNota={showNota} />
+      <Nota setShowNotas={setShowNotas} showNota={showNota} />
       </div>
 
     </>

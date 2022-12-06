@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
+import { editNota } from "../config/database"
 
-export default ({ showNota }) => {
+export default ({ showNota,setShowNotas }) => {
     const titulo = useRef()
     const nota = useRef()
     useEffect(() => {
@@ -14,7 +15,11 @@ export default ({ showNota }) => {
                 <textarea ref={nota} style={{ width: "90%" }} ></textarea>
             </div>
             <div
-                onClick={() => { console.log("Fechou") }}
+                onClick={() => { 
+
+                    editNota({id:showNota.id,nota:nota.current.value ,titulo: titulo.current.value })
+                    setShowNotas({display:0,titulo:"",nota:""})
+            }}
                 style={{ backgroundColor:"aliceblue",display: "flex", justifyContent: "center", alignItems: "center", position: "fixed", top: 0, left: 0, width: "100vw", height: "100%", zIndex: "150" }}>
             </div>
 
