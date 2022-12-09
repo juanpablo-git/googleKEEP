@@ -23,3 +23,9 @@ input{
     /* width: 500px;
     padding-left:11 px; */
 }
+.envolto{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+}

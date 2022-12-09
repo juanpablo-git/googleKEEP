@@ -1,3 +1,11 @@
+@keyframes show{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
 .show-titulo{
     width: 100%;
     resize: none;
@@ -10,4 +18,13 @@
     height: 100%;
     pointer-events: none;
 
+}
+.button-delete{
+    border-radius: 100%;
+    display: none;
+    margin-left: 100%;
+    transition: 2s;
+    animation-name: show;
+    animation-duration: 1s;
+    margin-bottom: -20px;
 }

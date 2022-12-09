@@ -12,16 +12,12 @@ export default ({ atualizaModal,dispatchNotas, titulo, nota,id }) => {
                 buttonEdit.current.style.display = "none"
             }} 
         style={{ width: "auto",margin:"10px",maxWidth:200, maxHeight: 200, padding: "10px",border: "1px solid #e0e0e0", borderRadius: "10px"}}>
-             <button ref={buttonEdit}
+             <button className="button-delete" ref={buttonEdit}
                     onClick={()=>{
                         deletNota(atualizaModal,id)
                        
                     }}
-                    style={{
-                        borderRadius: "100%",
-                        display: "none",
-                        marginLeft: "100%",
-                    }}>
+                    >
                     ✖️
                 </button>
             <div 

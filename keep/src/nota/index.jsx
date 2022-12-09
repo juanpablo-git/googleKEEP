@@ -1,58 +1,50 @@
 import { useEffect, useRef } from "react"
 import { editNota } from "../config/database"
+import "./style.css"
 
-export default ({ atualizaModal,showModal, dispatchNotas }) => {
+export default ({ atualizaModal, showModal, dispatchNotas }) => {
     const tituloRef = useRef()
     const notaRef = useRef()
     useEffect(() => {
         tituloRef.current.value = showModal.titulo
         notaRef.current.value = showModal.nota
+        notaRef.current.style.height = `${notaRef.current.scrollHeight}px`
     }, [showModal])
 
     return (
-        <div style={{
-            width: "100%",
-            height: "100%",
-            zIndex: "330",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            display: showModal.display ? "flex" : "none",
-            justifyContent: "center",
-            alignItems: "center"
-        }}>
-            <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                height: '100vh',
-                width: "100vw",
-                zIndex: "146",
-                backgroundColor: "InfoText",
-                opacity:"0.98"
-            }}
-                onClick={() =>{
+        <div className="container-nota" style={{display: showModal.display ? "flex" : "none"}}>
+            <div className="focus-nota"
+                onClick={() => {
                     dispatchNotas({ type: false })
-                    editNota(atualizaModal,showModal.id,{titulo: tituloRef.current.value,nota:notaRef.current.value})
+                    editNota(atualizaModal, showModal.id, { titulo: tituloRef.current.value, nota: notaRef.current.value })
                 }}
             >
 
             </div>
 
-            <div style={{
-                padding: "20px",
-                display: "flex",
-                height: "max-content",
-                flexDirection: "column",
-                width: "50%",
-                alignItems: "center",
+            <div className="modal" >
 
-                zIndex: 300,
-                position: "absolute"
-            }}>
+                <textarea ref={tituloRef}
+                className="input-titulo"
+                    rows="1">
 
-                <textarea ref={tituloRef} style={{ width: "90%" }} rows="1"></textarea>
-                <textarea ref={notaRef} onClick={() => { console.log("mantem") }} style={{ width: "90%" }} ></textarea>
+                </textarea>
+                <textarea
+                 className="input-nota"
+                    ref={notaRef}
+                    onClick={() => { console.log("mantem") }}
+                    onKeyDown={(e)=>{
+                        e.target.style.height = `15px`
+                        e.target.style.height = `${e.target.scrollHeight}px`
+                        if(e.key == "Enter"){
+                            console.log(e.key)
+                            e.target.style.height = `${e.target.scrollHeight+20}px`
+                        }
+                    }}
+                    >
+                                
+
+                </textarea>
 
             </div>
         </div>
