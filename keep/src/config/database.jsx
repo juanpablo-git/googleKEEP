@@ -1,8 +1,8 @@
-import fs from 'vite-plugin-fs/browser';
-
-
+import fs from "vite-plugin-fs/browser"
 export async function insertNota({ titulo, nota }) {
-    const file = await fs.readFile('./db.json');
+    console.log("INSERINDO")
+    const file = await fs.readFile('/db.json');
+    console.log("INSERINDO",file)
     const fileJSON = JSON.parse(file)
     fileJSON.push({ titulo: titulo, nota: nota })
     let str = JSON.stringify(fileJSON)
