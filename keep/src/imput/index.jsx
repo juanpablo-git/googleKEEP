@@ -64,7 +64,6 @@ export default ({ atualizaModal, displayTitulo, setDisplayTitulo }) => {
                             dicpach({ type: "Envolto" })
                         }}
                         name="" id="" placeholder=" Crie uma nota...">
-
                     </textarea>
                 </div>
             </div>

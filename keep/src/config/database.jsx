@@ -1,4 +1,4 @@
-import fs from "vite-plugin-fs/browser"
+import fs from "fs/promises"
 export async function insertNota({ titulo, nota }) {
     console.log("INSERINDO")
     const file = await fs.readFile('/db.json');
