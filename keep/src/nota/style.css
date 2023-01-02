@@ -58,7 +58,9 @@
     transition: 1s;
 
 }
-.input-nota{ width: 90%;
+.input-nota{ 
+    width: 90%;
+    max-height: 500px;
     border: none;
     resize: none;
     font-size: 1rem;
