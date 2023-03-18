@@ -5,6 +5,7 @@ import Imput from './imput'
 import "./style.css"
 import { getNota } from "./config/database"
 import Nota from './nota'
+import {Trello} from "./services/trello"
 
 function App() {
   const [displayTitulo, setDisplayTitulo] = useState(0)
@@ -57,6 +58,23 @@ function App() {
               <p>Suas notas aparecerão aqui</p>
           }
         </div>
+        <button onClick={async ()=>{
+          let tello = new Trello('6dUjUzG4',"96695c4dfefd4b98dd9c2af2bff2ea5b","ATTA18de1472551ec54e25fcba631be61748155cbe2cfd9d4c7df4c24811302f999cA7E3DE2C")
+          let retorno = await tello.getCardsOnABoard() 
+          await Promise.all(retorno.map(async (i) => {
+            let mem = i.idMembers.map(async (id) => {
+              if (id) {
+                return await tello.getAMenber(id);
+              }
+              return null;
+            });
+            i.idMembers = await Promise.all(mem);
+          }));
+          console.log(retorno)
+
+        }}>
+          dff
+        </button>
         <Nota atualizaModal={{notas:notas,setNotas:setNotas}} dispatchNotas={dispatchNotas} showModal={showNotas} />
       </div>
 
